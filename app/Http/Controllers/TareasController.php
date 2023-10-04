@@ -15,15 +15,31 @@ class TareasController extends Controller
         }catch (ModelNotFoundException $exception) {
             return response()->json(['error' => 'Tarea no encontrada'], 404);
         }
-    };
+    }
     
     
     public function ObtenerTodas(){
         return Tarea::all();
     }
-    
-    
-    public function BuscarPorAutor($autor){
 
+
+    public function BuscarPorAutor($autor){
+        try{
+            $tareas = Tareas::all();
+            $tareasDeAutor = $tareas -> $autor;
+            return $tareasDeAutor;
+        }catch (ModelNotFoundException $exception) {
+            return response()->json(['error' => 'Tareas no encontradas'], 404);
+        }
+    }
+
+    public function BuscarPorTitulo($titulo){
+        try{
+            $tareas = Tareas::all();
+            $titulosDeTareas = $tareas -> $titulo;
+            return $titulosDeTareas;
+        }catch (ModelNotFoundException $exception) {
+            return response()->json(['error' => 'Tareas no encontradas'], 404);
+        }
     }
 }
